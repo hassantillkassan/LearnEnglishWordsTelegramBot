@@ -4,7 +4,7 @@ fun main() {
 
     val vocabulary = loadVocabulary()
     val totalWords = vocabulary.size
-    val learnedWord = vocabulary.filter { it.correctAnswersCount >= 3 }.size
+    val learnedWords = vocabulary.filter { it.correctAnswersCount >= 3 }.size
 
     var userNavigation: Int?
 
@@ -16,9 +16,9 @@ fun main() {
             1 -> println("Учить слова")
             2 -> {
                 println(
-                    "Выучено $learnedWord " +
+                    "Выучено $learnedWords " +
                             "из $totalWords | " +
-                            "${(learnedWord * 100) / totalWords}"
+                            "${(learnedWords * 100) / totalWords}"
                 )
             }
 
