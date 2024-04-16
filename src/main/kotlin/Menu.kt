@@ -1,10 +1,10 @@
 package org.example
 
+const val SUCCESSFUL_NUM_OF_TIMES = 3
+
 fun main() {
 
     val vocabulary = loadVocabulary()
-    val totalWords = vocabulary.size
-    val learnedWords = vocabulary.filter { it.correctAnswersCount >= 3 }.size
 
     var userNavigation: Int?
 
@@ -15,10 +15,13 @@ fun main() {
         when (userNavigation) {
             1 -> println("Учить слова")
             2 -> {
+                val totalWords = vocabulary.size
+                val learnedWords = vocabulary.filter { it.correctAnswersCount >= SUCCESSFUL_NUM_OF_TIMES }.size
+
                 println(
                     "Выучено $learnedWords " +
                             "из $totalWords | " +
-                            "${(learnedWords * 100) / totalWords}"
+                            "${(learnedWords * 100) / totalWords}%"
                 )
             }
 
