@@ -4,6 +4,15 @@ import java.io.File
 
 fun main() {
 
+    val vocabulary = loadVocabulary()
+
+    vocabulary.forEach {
+        println("${it.text} - ${it.translate} (Количество правильных ответов - ${it.correctAnswersCount})")
+    }
+}
+
+fun loadVocabulary(): MutableList<Word> {
+
     val wordsFile = File("words.txt")
 
     val vocabulary: MutableList<Word> = mutableListOf()
@@ -21,7 +30,5 @@ fun main() {
         }
     }
 
-    vocabulary.forEach {
-        println("${it.text} - ${it.translate} (Количество правильных ответов - ${it.correctAnswersCount})")
-    }
+    return vocabulary
 }
