@@ -1,5 +1,15 @@
 hello|привет|3
-dog|собака|1
+dog|собака|2
 cat|кошка|3
-jewellery|ювелирные украшения|
+jewellery|ювелирные украшения|1
 moolah|деньги|2
+bull|бык|2
+stalk|стебель|2
+chant|скандировать|2
+gene|ген|1
+ferocious|свирепый|2
+velcro|липучка|1
+bedlam|сумасшедший дом|2
+dwarf|карлик|1
+ape shit|злой|1
+giant|гигант|2

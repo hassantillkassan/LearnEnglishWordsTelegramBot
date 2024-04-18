@@ -32,3 +32,13 @@ fun loadVocabulary(): MutableList<Word> {
 
     return vocabulary
 }
+
+fun updateCorrectAnswersCount(vocabulary: MutableList<Word>, wordToUpdate: String) {
+    val word = vocabulary.find { it.text == wordToUpdate }
+    if (word != null) word.correctAnswersCount++
+}
+
+fun updateVocabulary(vocabulary: MutableList<Word>) {
+    val content = vocabulary.joinToString("\n") { "${it.text}|${it.translate}|${it.correctAnswersCount}" }
+    File("words.txt").writeText(content)
+}
