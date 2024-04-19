@@ -1,6 +1,7 @@
 package org.example
 
 const val SUCCESSFUL_NUM_OF_TIMES = 3
+const val NUM_OF_CHOICES = 4
 
 fun main() {
 
@@ -19,12 +20,15 @@ fun main() {
                     val listOfUnlearnedWords: List<Word> =
                         vocabulary.filter { it.correctAnswersCount < SUCCESSFUL_NUM_OF_TIMES }
 
-                    if (listOfUnlearnedWords.isEmpty()) break
+                    if (listOfUnlearnedWords.isEmpty()) {
+                        println("Вы выучили все слова")
+                        break
+                    }
 
-                    val answers = listOfUnlearnedWords.shuffled().take(4)
-                    val question = answers.random().text
+                    val answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES)
+                    val correctAnswer = answers.random()
 
-                    println(question)
+                    println(correctAnswer.text)
                     println(answers.mapIndexed { index, it ->
                         "${index + 1})${it.translate}"
                     }.joinToString(separator = " ", postfix = ""))
@@ -33,9 +37,9 @@ fun main() {
                     enteredDigit = readln().toIntOrNull()
 
                     when (enteredDigit) {
-                        (answers.indexOfFirst { it.text == question } + 1) -> {
+                        (answers.indexOfFirst { it.text == correctAnswer.text } + 1) -> {
                             println("Верно")
-                            updateCorrectAnswersCount(vocabulary, question)
+                            updateCorrectAnswersCount(vocabulary, correctAnswer.text)
                         }
 
                         0 -> break
