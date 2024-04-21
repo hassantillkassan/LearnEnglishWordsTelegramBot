@@ -6,10 +6,10 @@ moolah|деньги|3
 bull|бык|3
 stalk|стебель|3
 chant|скандировать|3
-gene|ген|2
-ferocious|свирепый|2
-velcro|липучка|2
-bedlam|сумасшедший дом|1
-dwarf|карлик|2
+gene|ген|3
+ferocious|свирепый|3
+velcro|липучка|3
+bedlam|сумасшедший дом|3
+dwarf|карлик|3
 ape shit|злой|1
 giant|гигант|1

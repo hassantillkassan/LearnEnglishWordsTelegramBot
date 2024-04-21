@@ -25,7 +25,7 @@ fun main() {
                         break
                     }
 
-                    var answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES).toMutableList()
+                    val answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES).toMutableList()
                     val correctAnswer = answers.random()
 
                     if (answers.size < NUM_OF_CHOICES) {
@@ -34,7 +34,9 @@ fun main() {
                             .shuffled()
                             .take(NUM_OF_CHOICES - answers.size)
 
-                        answers = (answers + learnedWords).shuffled().toMutableList()
+                        answers += learnedWords
+                        answers.shuffle()
+
                     }
 
                     println(correctAnswer.text)
