@@ -25,8 +25,17 @@ fun main() {
                         break
                     }
 
-                    val answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES)
+                    var answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES).toMutableList()
                     val correctAnswer = answers.random()
+
+                    if (answers.size < NUM_OF_CHOICES) {
+                        val learnedWords = vocabulary
+                            .filter { it.correctAnswersCount >= SUCCESSFUL_NUM_OF_TIMES }
+                            .shuffled()
+                            .take(NUM_OF_CHOICES - answers.size)
+
+                        answers = (answers + learnedWords).shuffled().toMutableList()
+                    }
 
                     println(correctAnswer.text)
                     println(answers.mapIndexed { index, it ->
@@ -39,7 +48,9 @@ fun main() {
                     when (enteredDigit) {
                         (answers.indexOfFirst { it.text == correctAnswer.text } + 1) -> {
                             println("Верно")
-                            updateCorrectAnswersCount(vocabulary, correctAnswer.text)
+                            correctAnswer.correctAnswersCount++
+
+                            updateVocabulary(vocabulary)
                         }
 
                         0 -> break
@@ -48,7 +59,6 @@ fun main() {
 
                 } while (true)
 
-                updateVocabulary(vocabulary)
             }
 
             2 -> {
