@@ -3,13 +3,13 @@ dog|собака|3
 cat|кошка|3
 jewellery|ювелирные украшения|3
 moolah|деньги|3
-bull|бык|3
-stalk|стебель|3
+bull|бык|2
+stalk|стебель|1
 chant|скандировать|3
-gene|ген|3
+gene|ген|1
 ferocious|свирепый|3
-velcro|липучка|3
+velcro|липучка|1
 bedlam|сумасшедший дом|3
-dwarf|карлик|3
+dwarf|карлик|2
 ape shit|злой|1
 giant|гигант|1

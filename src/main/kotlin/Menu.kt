@@ -42,9 +42,10 @@ fun main() {
                     println(correctAnswer.text)
                     println(answers.mapIndexed { index, it ->
                         "${index + 1})${it.translate}"
-                    }.joinToString(separator = " ", postfix = ""))
+                    }.joinToString(separator = " ", postfix = "")
+                    + "\n0)Меню")
 
-                    println("Введите номер правильного ответа (Выход в меню - 0)")
+                    println("Введите номер правильного ответа:")
                     enteredDigit = readln().toIntOrNull()
 
                     when (enteredDigit) {
