@@ -1,15 +1,15 @@
-hello|привет|3
-dog|собака|3
-cat|кошка|3
+punishment|наказание|1
+expenses|расходы|1
+bail|залог|1
 jewellery|ювелирные украшения|3
 moolah|деньги|3
 bull|бык|3
 stalk|стебель|3
-chant|скандировать|3
-gene|ген|3
+chant|скандировать|1
+gene|ген|1
 ferocious|свирепый|3
-velcro|липучка|3
+velcro|липучка|1
 bedlam|сумасшедший дом|3
-dwarf|карлик|3
-ape shit|злой|1
-giant|гигант|1
+dwarf|карлик|2
+ape shit|злой|3
+giant|гигант|2
