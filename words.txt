@@ -10,6 +10,6 @@ gene|ген|1
 ferocious|свирепый|3
 velcro|липучка|1
 bedlam|сумасшедший дом|3
-dwarf|карлик|2
+dwarf|карлик|1
 ape shit|злой|3
-giant|гигант|2
+giant|гигант|1

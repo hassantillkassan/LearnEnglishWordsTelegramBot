@@ -2,8 +2,6 @@ package org.example
 
 import java.io.File
 
-const val SUCCESSFUL_NUM_OF_TIMES = 3
-const val NUM_OF_CHOICES = 4
 
 data class Statistics(
     val totalWords: Int,
@@ -16,15 +14,19 @@ data class Question(
     val correctAnswer: Word,
 )
 
-class LearnWordsTrainer {
+class LearnWordsTrainer (
+    private val successfulNumOfTimes: Int = 3,
+    private val numOfChoices: Int = 4,
+    private val fileName: String = "words.txt",
+) {
 
     private var question: Question? = null
-    val vocabulary = loadVocabulary()
+    private val vocabulary = loadVocabulary()
 
     fun getStatistics(): Statistics {
 
         val totalWords = vocabulary.size
-        val learnedWords = vocabulary.filter { it.correctAnswersCount >= SUCCESSFUL_NUM_OF_TIMES }.size
+        val learnedWords = vocabulary.filter { it.correctAnswersCount >= successfulNumOfTimes }.size
         val percent = (learnedWords * 100) / totalWords
 
         return Statistics(totalWords, learnedWords, percent)
@@ -33,17 +35,17 @@ class LearnWordsTrainer {
     fun getNextQuestion(): Question? {
 
         val listOfUnlearnedWords: List<Word> = vocabulary
-            .filter { it.correctAnswersCount < SUCCESSFUL_NUM_OF_TIMES }
+            .filter { it.correctAnswersCount < successfulNumOfTimes }
         if (listOfUnlearnedWords.isEmpty()) return null
 
-        val answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES).toMutableList()
+        val answers = listOfUnlearnedWords.shuffled().take(numOfChoices).toMutableList()
         val correctAnswer = answers.random()
 
-        if (answers.size < NUM_OF_CHOICES) {
+        if (answers.size < numOfChoices) {
             val learnedWords = vocabulary
-                .filter { it.correctAnswersCount >= SUCCESSFUL_NUM_OF_TIMES }
+                .filter { it.correctAnswersCount >= successfulNumOfTimes }
                 .shuffled()
-                .take(NUM_OF_CHOICES - answers.size)
+                .take(numOfChoices - answers.size)
 
             answers += learnedWords
             answers.shuffle()
@@ -72,9 +74,9 @@ class LearnWordsTrainer {
         } ?: false
     }
 
-     private fun loadVocabulary(): MutableList<Word> {
+     private fun loadVocabulary(): List<Word> {
 
-        val wordsFile = File("words.txt")
+        val wordsFile = File(fileName)
         val vocabulary: MutableList<Word> = mutableListOf()
 
         wordsFile.forEachLine { line: String ->
@@ -92,7 +94,7 @@ class LearnWordsTrainer {
         return vocabulary
     }
 
-     private fun updateVocabulary(vocabulary: MutableList<Word>) {
+     private fun updateVocabulary(vocabulary: List<Word>) {
 
         val content = vocabulary
             .joinToString("\n") { "${it.text}|${it.translate}|${it.correctAnswersCount}" }
