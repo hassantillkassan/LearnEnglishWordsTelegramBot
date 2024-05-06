@@ -1,14 +1,18 @@
 package org.example
 
-const val SUCCESSFUL_NUM_OF_TIMES = 3
-const val NUM_OF_CHOICES = 4
+fun Question.asConsoleString(): String {
+    val variants = this.variants.mapIndexed { index, it ->
+        "${index + 1})${it.translate}"
+    }.joinToString(separator = " ", postfix = "")
+
+    return this.correctAnswer.text + "\n" + variants + "\n0)Меню"
+}
 
 fun main() {
 
-    val vocabulary = loadVocabulary()
+    val trainer = LearnWordsTrainer()
 
     var userNavigation: Int?
-    var enteredDigit: Int?
 
     do {
         println("Меню: 1 – Учить слова, 2 – Статистика, 0 – Выход")
@@ -17,61 +21,34 @@ fun main() {
         when (userNavigation) {
             1 -> {
                 do {
-                    val listOfUnlearnedWords: List<Word> =
-                        vocabulary.filter { it.correctAnswersCount < SUCCESSFUL_NUM_OF_TIMES }
+                    val question = trainer.getNextQuestion()
 
-                    if (listOfUnlearnedWords.isEmpty()) {
+                    if (question == null) {
                         println("Вы выучили все слова")
                         break
                     }
 
-                    val answers = listOfUnlearnedWords.shuffled().take(NUM_OF_CHOICES).toMutableList()
-                    val correctAnswer = answers.random()
+                    println(question.asConsoleString())
 
-                    if (answers.size < NUM_OF_CHOICES) {
-                        val learnedWords = vocabulary
-                            .filter { it.correctAnswersCount >= SUCCESSFUL_NUM_OF_TIMES }
-                            .shuffled()
-                            .take(NUM_OF_CHOICES - answers.size)
+                    println("Введите номер правильного ответа (Выход в меню - 0)")
+                    val userAnswerInput = readln().toIntOrNull()
+                    if (userAnswerInput == 0) break
 
-                        answers += learnedWords
-                        answers.shuffle()
-
-                    }
-
-                    println(correctAnswer.text)
-                    println(answers.mapIndexed { index, it ->
-                        "${index + 1})${it.translate}"
-                    }.joinToString(separator = " ", postfix = "")
-                    + "\n0)Меню")
-
-                    println("Введите номер правильного ответа:")
-                    enteredDigit = readln().toIntOrNull()
-
-                    when (enteredDigit) {
-                        (answers.indexOfFirst { it.text == correctAnswer.text } + 1) -> {
-                            println("Верно")
-                            correctAnswer.correctAnswersCount++
-
-                            updateVocabulary(vocabulary)
-                        }
-
-                        0 -> break
-                        else -> println("Неверно")
-                    }
+                    if (trainer.checkAnswer(userAnswerInput?.minus(1)))
+                        println("Верно")
+                    else
+                        println("Неверно")
 
                 } while (true)
 
             }
 
             2 -> {
-                val totalWords = vocabulary.size
-                val learnedWords = vocabulary.filter { it.correctAnswersCount >= SUCCESSFUL_NUM_OF_TIMES }.size
-
+                val statistics = trainer.getStatistics()
                 println(
-                    "Выучено $learnedWords " +
-                            "из $totalWords | " +
-                            "${(learnedWords * 100) / totalWords}%"
+                    "Выучено ${statistics.learnedWords} " +
+                            "из ${statistics.totalWords} | " +
+                            "${statistics.percent}%"
                 )
             }
 
