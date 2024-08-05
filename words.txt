@@ -1,15 +1,15 @@
-punishment|наказание|1
+punishment|наказание|2
 expenses|расходы|1
-bail|залог|1
+bail|залог|3
 jewellery|ювелирные украшения|3
 moolah|деньги|3
 bull|бык|3
 stalk|стебель|3
 chant|скандировать|1
-gene|ген|1
+gene|ген|3
 ferocious|свирепый|3
-velcro|липучка|1
+velcro|липучка|3
 bedlam|сумасшедший дом|3
 dwarf|карлик|1
 ape shit|злой|3
-giant|гигант|1
+giant|гигант|2

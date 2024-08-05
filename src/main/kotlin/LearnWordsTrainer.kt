@@ -99,7 +99,7 @@ class LearnWordsTrainer (
         val content = vocabulary
             .joinToString("\n") { "${it.text}|${it.translate}|${it.correctAnswersCount}" }
 
-        File("words.txt").writeText(content)
+        File(fileName).writeText(content)
     }
 }
 
